@@ -9,7 +9,7 @@ export class CommentScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    id?: string | StringFilter | null;
+    id?: StringFilter | null;
 
     @Field(() => DateTimeFilter, {
         nullable: true,
@@ -27,19 +27,19 @@ export class CommentScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    body?: string | StringFilter | null;
+    body?: StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    authorId?: string | StringFilter | null;
+    authorId?: StringFilter | null;
 
     @Field(() => NullableStringFilter, {
         nullable: true,
         description: undefined,
     })
-    articleId?: string | NullableStringFilter | null;
+    articleId?: NullableStringFilter | null;
 
     @Field(() => [CommentScalarWhereInput], {
         nullable: true,

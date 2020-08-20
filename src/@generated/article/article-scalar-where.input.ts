@@ -13,31 +13,31 @@ export class ArticleScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    id?: string | StringFilter | null;
+    id?: StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    slug?: string | StringFilter | null;
+    slug?: StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    title?: string | StringFilter | null;
+    title?: StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    description?: string | StringFilter | null;
+    description?: StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    body?: string | StringFilter | null;
+    body?: StringFilter | null;
 
     @Field(() => TagFilter, {
         nullable: true,
@@ -61,13 +61,13 @@ export class ArticleScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    favoritesCount?: number | IntFilter | null;
+    favoritesCount?: IntFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    authorId?: string | StringFilter | null;
+    authorId?: StringFilter | null;
 
     @Field(() => UserFilter, {
         nullable: true,
@@ -85,7 +85,7 @@ export class ArticleScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    active?: boolean | NullableBooleanFilter | null;
+    active?: NullableBooleanFilter | null;
 
     @Field(() => [ArticleScalarWhereInput], {
         nullable: true,

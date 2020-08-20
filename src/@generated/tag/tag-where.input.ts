@@ -8,13 +8,13 @@ export class TagWhereInput {
         nullable: true,
         description: undefined,
     })
-    id?: string | StringFilter | null;
+    id?: StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    name?: string | StringFilter | null;
+    name?: StringFilter | null;
 
     @Field(() => ArticleFilter, {
         nullable: true,

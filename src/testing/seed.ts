@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 
     await prisma.user.findMany({ where: { NOT: { id: '1' } } });
     await prisma.user.findOne({ where: { id: '1' } });
+    await prisma.user.aggregate({ avg: { countComments: true }, where: {} });
 
     // await prisma.user.create({
     //     data: {

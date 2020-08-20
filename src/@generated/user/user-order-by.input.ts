@@ -38,4 +38,10 @@ export class UserOrderByInput {
         description: undefined,
     })
     image?: SortOrder | null;
+
+    @Field(() => SortOrder, {
+        nullable: true,
+        description: undefined,
+    })
+    countComments?: SortOrder | null;
 }

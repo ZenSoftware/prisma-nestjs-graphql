@@ -37,6 +37,7 @@
     "eslint:fix": "npm run eslint -- --fix",
     "build": "sh Taskfile bundle",
     "prisma:g": "node node_modules/@prisma/cli/build/index.js generate",
+    "pp": "npm run prisma:g && npm run prettier:format",
     "unused": "no-unused-export \"src/**/*.ts\"",
     "prettier:format": "npx prettier src --write",
     "start:example": "node -r ts-node/register/transpile-only src/example/main.ts"

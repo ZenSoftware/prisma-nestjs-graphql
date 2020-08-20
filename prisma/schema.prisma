@@ -24,8 +24,9 @@ model User {
     following        User[]    @relation("UserFollows", references: [id])
     followers        User[]    @relation("UserFollows", references: [id])
     favoriteArticles Article[] @relation(name: "FavoritedArticles", references: [id])
-    articles          Article[] @relation("ArticleAuthor")
-    comments          Comment[]
+    countComments    Int?
+    articles         Article[] @relation("ArticleAuthor")
+    comments         Comment[]
 }
 
 model Tag {
