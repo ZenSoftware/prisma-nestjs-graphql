@@ -34,7 +34,6 @@ describe('generate models', () => {
         await getResult(`model User {
                 id String @id
             }`);
-        sourceText = sourceFile.getText();
         stringContains('@Field(() => ID, { nullable: false, description: undefined })', sourceText);
         stringContains('id!: string', sourceText);
         stringContains(`import { ObjectType, ID, Field } from '@nestjs/graphql'`, sourceText);
@@ -45,7 +44,6 @@ describe('generate models', () => {
                 id Int @id
                 image String?
             }`);
-        const sourceText = sourceFile.getText();
         stringContains(
             '@Field(() => String, { nullable: true, description: undefined })',
             sourceText,
@@ -57,7 +55,6 @@ describe('generate models', () => {
         await getResult(`model User {
                 count Int @id @default(1)
             }`);
-        const sourceText = sourceFile.getText();
         stringContains(
             '@Field(() => ID, { nullable: false, defaultValue: 1, description: undefined })',
             sourceText,
@@ -81,7 +78,6 @@ describe('generate models', () => {
             }`,
             { sourceFileText: `@ObjectType() export class User {}` },
         );
-        sourceText = sourceFile.getText();
         assert.strictEqual(sourceText.match(/export class User/g)?.length, 1);
     });
 
@@ -92,7 +88,6 @@ describe('generate models', () => {
                 id Int @id
             }`,
         );
-        sourceText = sourceFile.getText();
         stringContains(`@ObjectType({ description: "User really" })`, sourceText);
     });
 
@@ -103,7 +98,6 @@ describe('generate models', () => {
                 id Int @id
             }`,
         );
-        sourceText = sourceFile.getText();
         stringContains(
             `    @Field(() => ID, { nullable: false, description: "user id" }) id!: number`,
             sourceText,
@@ -119,7 +113,6 @@ describe('generate models', () => {
                 sourceFileText: `@ObjectType({ description: 'user description' }) export class User {}`,
             },
         );
-        sourceText = sourceFile.getText();
         stringContains(`@ObjectType({ description: undefined }) export class User`, sourceText);
     });
 
@@ -166,7 +159,6 @@ describe('generate models', () => {
                 id String @id
                 data Json
             }`);
-        sourceText = sourceFile.getText();
         const propertyDeclaration = sourceFile.getClass('User')?.getProperty('data');
         assert(propertyDeclaration);
         stringContains(`@Field(() => GraphQLJSON`, propertyDeclaration.getText());
@@ -179,5 +171,19 @@ describe('generate models', () => {
             .getNamedImports()
             .find((x) => x.getName() === 'GraphQLJSON');
         assert(importSpecifier, 'const GraphQLJSON should be imported');
+    });
+
+    it('should not resort imports for existing', async () => {
+        await getResult(
+            `model User {
+                id String @id
+            }`,
+            { sourceFileText: `import { Field, ID, ObjectType, Int } from '@nestjs/graphql'` },
+        );
+        const imports = sourceFile
+            .getImportDeclarations()
+            .flatMap((x) => x.getNamedImports())
+            .map((x) => x.getName());
+        assert.deepStrictEqual(imports, ['Field', 'ID', 'ObjectType', 'Int']);
     });
 });

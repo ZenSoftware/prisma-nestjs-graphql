@@ -7,21 +7,24 @@ const patterns = new Map([
     [{ type: (type: string) => type === 'Json', kind: 'scalar' }, () => 'object'],
     [
         {
-            type: (type: string) => ['StringFilter', 'NullableStringFilter'].includes(type),
+            type: (type: string) =>
+                ['StringFilter', 'NullableStringFilter', 'StringNullableFilter'].includes(type),
             kind: 'object',
         },
         (field: { type: string }) => `string | ${field.type}`,
     ],
     [
         {
-            type: (type: string) => ['IntFilter', 'NullableIntFilter'].includes(type),
+            type: (type: string) =>
+                ['IntFilter', 'NullableIntFilter', 'IntNullableFilter'].includes(type),
             kind: 'object',
         },
         (field: { type: string }) => `number | ${field.type}`,
     ],
     [
         {
-            type: (type: string) => ['BooleanFilter', 'NullableBooleanFilter'].includes(type),
+            type: (type: string) =>
+                ['BooleanFilter', 'NullableBooleanFilter', 'BoolNullableFilter'].includes(type),
             kind: 'object',
         },
         (field: { type: string }) => `boolean | ${field.type}`,
