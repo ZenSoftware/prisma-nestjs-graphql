@@ -21,14 +21,13 @@
     "nestjs-graphql"
   ],
   "scripts": {
-    "test": "npm run eslint && npm run tscheck && npm run test:cov && npm run typecov",
+    "test": "npm run eslint && npm run tscheck && npm run test:cov",
     "mocha": "node node_modules/mocha/bin/_mocha",
     "test:r": "mocha -r ts-node/register/transpile-only src/**/*.spec.ts",
     "test:cov": "c8 --reporter text --exclude \"**/*.spec.ts\" --exclude \"**/testing/**\"  npm run test:r -- --no-timeouts",
     "test:w": "mocha -r ts-node/register/transpile-only --watch-files src/**/*.ts --watch src/**/*.spec.ts",
     "test:d": "node --inspect-brk -r ts-node/register/transpile-only node_modules/mocha/bin/_mocha --no-timeouts --watch-files src/**/*.ts --watch src/**/*.spec.ts",
     "test:brk": "node --inspect-brk -r ts-node/register/transpile-only node_modules/mocha/bin/_mocha --no-timeouts src/**/*.spec.ts",
-    "typecov": "node node_modules/type-coverage/bin/type-coverage --detail",
     "tscheck": "echo tscheck... && tsc --noEmit",
     "tscheck:w": "npm run tscheck -- --watch",
     "eslint:w": "watchexec -w src \"npm run eslint\"",
@@ -37,9 +36,8 @@
     "eslint:fix": "npm run eslint -- --fix",
     "build": "sh Taskfile bundle",
     "prisma:g": "node node_modules/@prisma/cli/build/index.js generate",
-    "pp": "npm run prisma:g && npm run prettier:format",
-    "unused": "no-unused-export \"src/**/*.ts\"",
     "prettier:format": "npx prettier src --write",
+    "regen": "rm -rf src/@generated && npm run prisma:g && npm run prettier:format",
     "start:example": "node -r ts-node/register/transpile-only src/example/main.ts"
   },
   "husky": {
@@ -98,7 +96,6 @@
     "graphql-type-json": "^0.3.2",
     "husky": "^4.2.5",
     "mocha": "^8.1.1",
-    "no-unused-export": "^1.12.2",
     "precise-commits": "^1.0.2",
     "prettier": "^2.0.5",
     "reflect-metadata": "^0.1.13",
@@ -106,7 +103,6 @@
     "semantic-release": "^17.1.1",
     "simplytyped": "^3.3.0",
     "ts-node": "^8.10.2",
-    "type-coverage": "^2.9.0",
     "typescript": "~3.9.7",
     "watchexec-bin": "^1.0.0"
   }
