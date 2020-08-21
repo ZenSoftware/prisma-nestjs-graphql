@@ -20,11 +20,9 @@ describe('main generate', () => {
 
     it('smoke one', async () => {
         await getResult({
-            schema: `
-            model User {
+            schema: `model User {
               id        Int      @id
-            }
-            `,
+            }`,
         });
         const filePaths = sourceFiles.map((s) => String(s.getFilePath()));
         assert.notStrictEqual(filePaths.length, 0);
@@ -86,8 +84,8 @@ describe('main generate', () => {
     it('generator option outputFilePattern', async () => {
         await getResult({
             schema: `model User {
-                    id Int @id
-                }`,
+              id        Int      @id
+            }`,
             outputFilePattern: 'data/{name}.{type}.ts',
         });
         const filePaths = sourceFiles.map((s) => String(s.getFilePath()));
@@ -113,11 +111,9 @@ describe('main generate', () => {
 
     it('generate enum file', async () => {
         await getResult({
-            schema: `
-                model User {
-                  id    Int   @id
-                }
-            `,
+            schema: `model User {
+              id        Int      @id
+            }`,
         });
         const filePaths = sourceFiles.map((s) => String(s.getFilePath()));
         assert(
@@ -129,5 +125,86 @@ describe('main generate', () => {
             .find((s) => s.getFilePath().endsWith('sort-order.enum.ts'))
             ?.getText()!;
         assert(sourceText);
+    });
+
+    describe('scalar filters should be combied', () => {
+        function getUserWhereInput() {
+            return sourceFiles.find((s) => s.getFilePath() === '/user/user-where.input.ts');
+        }
+        it('int filter', async () => {
+            await getResult({
+                schema: `model User {
+              id        Int      @id
+              age       Int?
+            }`,
+            });
+            const filePaths = sourceFiles.map((s) => String(s.getFilePath()));
+            const file = filePaths.find(
+                (f) =>
+                    f.includes('nested-int-filter') ||
+                    f.includes('int-nullable-filter') ||
+                    f.includes('nullable-int-filter') ||
+                    f.includes('nested-int-nullable-filter'),
+            );
+            assert(file === undefined, `This file should not exists ${file}`);
+            const imports = getUserWhereInput()
+                ?.getImportDeclarations()
+                ?.flatMap((x) => x.getNamedImports())
+                .map((x) => x.getName());
+            assert.deepEqual(imports, ['InputType', 'Field', 'IntFilter']);
+        });
+
+        it('string filter', async () => {
+            await getResult({
+                schema: `model User {
+              id        String      @id
+              name      String?
+            }`,
+            });
+            const filePaths = sourceFiles.map((s) => String(s.getFilePath()));
+            const file = filePaths.find(
+                (f) =>
+                    f.includes('nested-string-filter') ||
+                    f.includes('string-nullable-filter') ||
+                    f.includes('nullable-string-filter') ||
+                    f.includes('nested-string-nullable-filter'),
+            );
+            assert(file === undefined, `This file should not exists ${file}`);
+
+            const imports = getUserWhereInput()
+                ?.getImportDeclarations()
+                ?.flatMap((x) => x.getNamedImports())
+                .map((x) => x.getName());
+            assert.deepEqual(imports, ['InputType', 'Field', 'StringFilter']);
+        });
+
+        it('boolean filter', async () => {
+            await getResult({
+                schema: `model User {
+              id        Boolean      @id
+              male      Boolean?
+              female    Boolean
+            }`,
+            });
+            const filePaths = sourceFiles.map((s) => String(s.getFilePath()));
+            const file = filePaths.find(
+                (f) =>
+                    f.includes('nested-bool-filter') ||
+                    f.includes('bool-nullable-filter') ||
+                    f.includes('nullable-bool-filter') ||
+                    f.includes('nested-bool-nullable-filter') ||
+                    f.includes('nested-boolean-filter') ||
+                    f.includes('boolean-nullable-filter') ||
+                    f.includes('nullable-boolean-filter') ||
+                    f.includes('nested-boolean-nullable-filter'),
+            );
+            assert(file === undefined, `This file should not exists ${file}`);
+
+            const imports = getUserWhereInput()
+                ?.getImportDeclarations()
+                ?.flatMap((x) => x.getNamedImports())
+                .map((x) => x.getName());
+            assert.deepEqual(imports, ['InputType', 'Field', 'BooleanFilter']);
+        });
     });
 });

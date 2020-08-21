@@ -1,9 +1,8 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
-import { NullableStringFilter } from '../prisma/nullable-string-filter.input';
 import { UserFilter } from './user-filter.input';
 import { ArticleFilter } from '../article/article-filter.input';
-import { NullableIntFilter } from '../prisma/nullable-int-filter.input';
+import { IntFilter } from '../prisma/int-filter.input';
 import { CommentFilter } from '../comment/comment-filter.input';
 
 @InputType({})
@@ -12,37 +11,37 @@ export class UserScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    id?: StringFilter | null;
+    id?: string | StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    email?: StringFilter | null;
+    email?: string | StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    name?: StringFilter | null;
+    name?: string | StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    password?: StringFilter | null;
+    password?: string | StringFilter | null;
 
-    @Field(() => NullableStringFilter, {
+    @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    bio?: NullableStringFilter | null;
+    bio?: string | StringFilter | null;
 
-    @Field(() => NullableStringFilter, {
+    @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    image?: NullableStringFilter | null;
+    image?: string | StringFilter | null;
 
     @Field(() => UserFilter, {
         nullable: true,
@@ -62,11 +61,11 @@ export class UserScalarWhereInput {
     })
     favoriteArticles?: ArticleFilter | null;
 
-    @Field(() => NullableIntFilter, {
+    @Field(() => IntFilter, {
         nullable: true,
         description: undefined,
     })
-    countComments?: NullableIntFilter | null;
+    countComments?: number | IntFilter | null;
 
     @Field(() => ArticleFilter, {
         nullable: true,

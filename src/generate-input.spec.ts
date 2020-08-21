@@ -47,7 +47,7 @@ describe('generate input', () => {
         stringContains(`id?: string | StringFilter | null`, idProperty.getText());
     });
 
-    it('user where int filters', async () => {
+    it('user where integer filters', async () => {
         await getResult({
             schema: `
             model User {

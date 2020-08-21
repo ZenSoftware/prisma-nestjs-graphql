@@ -5,7 +5,7 @@ import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { IntFilter } from '../prisma/int-filter.input';
 import { UserFilter } from '../user/user-filter.input';
 import { CommentFilter } from '../comment/comment-filter.input';
-import { NullableBooleanFilter } from '../prisma/nullable-boolean-filter.input';
+import { BooleanFilter } from '../prisma/boolean-filter.input';
 
 @InputType({})
 export class ArticleScalarWhereInput {
@@ -13,31 +13,31 @@ export class ArticleScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    id?: StringFilter | null;
+    id?: string | StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    slug?: StringFilter | null;
+    slug?: string | StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    title?: StringFilter | null;
+    title?: string | StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    description?: StringFilter | null;
+    description?: string | StringFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    body?: StringFilter | null;
+    body?: string | StringFilter | null;
 
     @Field(() => TagFilter, {
         nullable: true,
@@ -61,13 +61,13 @@ export class ArticleScalarWhereInput {
         nullable: true,
         description: undefined,
     })
-    favoritesCount?: IntFilter | null;
+    favoritesCount?: number | IntFilter | null;
 
     @Field(() => StringFilter, {
         nullable: true,
         description: undefined,
     })
-    authorId?: StringFilter | null;
+    authorId?: string | StringFilter | null;
 
     @Field(() => UserFilter, {
         nullable: true,
@@ -81,11 +81,11 @@ export class ArticleScalarWhereInput {
     })
     comments?: CommentFilter | null;
 
-    @Field(() => NullableBooleanFilter, {
+    @Field(() => BooleanFilter, {
         nullable: true,
         description: undefined,
     })
-    active?: NullableBooleanFilter | null;
+    active?: boolean | BooleanFilter | null;
 
     @Field(() => [ArticleScalarWhereInput], {
         nullable: true,

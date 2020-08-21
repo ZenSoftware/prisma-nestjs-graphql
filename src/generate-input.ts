@@ -4,6 +4,7 @@ import { SourceFile } from 'ts-morph';
 
 import { generateClass } from './generate-class';
 import { generateProperty } from './generate-property';
+import { typeFilterVariation } from './type-utils';
 
 type GenerateInputArgs = {
     inputType: PrismaDMMF.InputType;
@@ -15,16 +16,17 @@ export function generateInput(args: GenerateInputArgs) {
     const { inputType, sourceFile, projectFilePath } = args;
     const classDeclaration = generateClass({
         sourceFile,
-        decoratorName: 'InputType',
         name: inputType.name,
-        properties: [],
+        decorator: {
+            name: 'InputType',
+            properties: [],
+        },
     });
-
     for (const field of inputType.fields) {
         const matchInput = findInputType(field, inputType);
         generateProperty({
             field: {
-                type: String(matchInput.type),
+                type: typeFilterVariation(matchInput.type as string),
                 kind: matchInput.kind,
                 isList: matchInput.isList,
                 name: field.name,
