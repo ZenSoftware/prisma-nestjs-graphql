@@ -3,8 +3,8 @@ import { ClassDeclaration, Node, ObjectLiteralExpression, SourceFile } from 'ts-
 
 import { generateGraphqlImport } from './generate-graphql-import';
 import { generateProjectImport } from './generate-project-import';
-import { toGraphqlImportType, toPropertyType } from './type-utils';
 import { setObjectProperty } from './object-property';
+import { toGraphqlImportType, toPropertyType } from './type-utils';
 
 type GeneratePropertyArgs = {
     projectFilePath(data: { name: string; type: string }): string;

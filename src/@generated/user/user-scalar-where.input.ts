@@ -1,8 +1,9 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
+import { NullableStringFilter } from '../prisma/nullable-string-filter.input';
 import { UserFilter } from './user-filter.input';
 import { ArticleFilter } from '../article/article-filter.input';
-import { IntFilter } from '../prisma/int-filter.input';
+import { NullableIntFilter } from '../prisma/nullable-int-filter.input';
 import { CommentFilter } from '../comment/comment-filter.input';
 
 @InputType({})
@@ -31,17 +32,17 @@ export class UserScalarWhereInput {
     })
     password?: string | StringFilter | null;
 
-    @Field(() => StringFilter, {
+    @Field(() => NullableStringFilter, {
         nullable: true,
         description: undefined,
     })
-    bio?: string | StringFilter | null;
+    bio?: NullableStringFilter | null;
 
-    @Field(() => StringFilter, {
+    @Field(() => NullableStringFilter, {
         nullable: true,
         description: undefined,
     })
-    image?: string | StringFilter | null;
+    image?: NullableStringFilter | null;
 
     @Field(() => UserFilter, {
         nullable: true,
@@ -61,11 +62,11 @@ export class UserScalarWhereInput {
     })
     favoriteArticles?: ArticleFilter | null;
 
-    @Field(() => IntFilter, {
+    @Field(() => NullableIntFilter, {
         nullable: true,
         description: undefined,
     })
-    countComments?: number | IntFilter | null;
+    countComments?: NullableIntFilter | null;
 
     @Field(() => ArticleFilter, {
         nullable: true,

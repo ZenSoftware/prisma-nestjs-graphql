@@ -1,16 +1,16 @@
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType({})
-export class BooleanFilter {
+export class NullableBooleanFilter {
     @Field(() => Boolean, {
         nullable: true,
         description: undefined,
     })
     equals?: boolean | null;
 
-    @Field(() => BooleanFilter, {
+    @Field(() => NullableBooleanFilter, {
         nullable: true,
         description: undefined,
     })
-    not?: boolean | BooleanFilter | null;
+    not?: NullableBooleanFilter | null;
 }

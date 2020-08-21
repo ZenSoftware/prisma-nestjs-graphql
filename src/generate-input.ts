@@ -26,7 +26,8 @@ export function generateInput(args: GenerateInputArgs) {
         const matchInput = findInputType(field, inputType);
         generateProperty({
             field: {
-                type: typeFilterVariation(matchInput.type as string),
+                type: matchInput.type as string,
+                // type: typeFilterVariation(matchInput.type as string),
                 kind: matchInput.kind,
                 isList: matchInput.isList,
                 name: field.name,

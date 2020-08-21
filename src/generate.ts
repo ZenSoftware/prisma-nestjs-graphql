@@ -63,10 +63,10 @@ export async function generate(args: GenerateArgs) {
     }
     // Generate inputs
     for (const inputType of prismaClientDmmf.schema.inputTypes) {
-        if (isFilterVariation(inputType.name)) {
-            continue;
-        }
-        inputType.name = typeFilterVariation(inputType.name);
+        // if (isFilterVariation(inputType.name)) {
+        //     continue;
+        // }
+        // inputType.name = typeFilterVariation(inputType.name);
         const sourceFile = await createSourceFile({ type: 'input', name: inputType.name });
         generateInput({ inputType, sourceFile, projectFilePath });
     }

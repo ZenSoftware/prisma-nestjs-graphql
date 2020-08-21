@@ -5,7 +5,7 @@ import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { IntFilter } from '../prisma/int-filter.input';
 import { UserFilter } from '../user/user-filter.input';
 import { CommentFilter } from '../comment/comment-filter.input';
-import { BooleanFilter } from '../prisma/boolean-filter.input';
+import { NullableBooleanFilter } from '../prisma/nullable-boolean-filter.input';
 
 @InputType({})
 export class ArticleScalarWhereInput {
@@ -81,11 +81,11 @@ export class ArticleScalarWhereInput {
     })
     comments?: CommentFilter | null;
 
-    @Field(() => BooleanFilter, {
+    @Field(() => NullableBooleanFilter, {
         nullable: true,
         description: undefined,
     })
-    active?: boolean | BooleanFilter | null;
+    active?: NullableBooleanFilter | null;
 
     @Field(() => [ArticleScalarWhereInput], {
         nullable: true,

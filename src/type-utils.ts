@@ -36,21 +36,21 @@ export function isFilterVariation(name: string): boolean {
 }
 
 function filterVariations(type: 'String' | 'Int' | 'Boolean' | 'DateTime') {
-    return [`${type}NullableFilter`, `Nested${type}NullableFilter`, `Nested${type}Filter`];
+    return [`Nullable${type}Filter`, `Nested${type}NullableFilter`, `Nested${type}Filter`];
 }
 
 const scalarFilters = new Map<string, string>([
     ...filterVariations('Int')
-        .concat('NullableIntFilter')
+        .concat('IntNullableFilter')
         .map((key) => [key, 'IntFilter'] as [string, string]),
     ...filterVariations('String')
-        .concat('NullableStringFilter')
+        .concat('StringNullableFilter')
         .map((key) => [key, 'StringFilter'] as [string, string]),
     ...filterVariations('Boolean')
-        .concat('NullableBooleanFilter')
+        .concat('BooleanNullableFilter')
         .map((key) => [key, 'BooleanFilter'] as [string, string]),
     ...filterVariations('DateTime')
-        .concat('NullableDateTimeFilter')
+        .concat('DateTimeNullableFilter')
         .map((key) => [key, 'DateTimeFilter'] as [string, string]),
     ['BoolNullableFilter', 'BooleanFilter'],
     ['NestedBoolNullableFilter', 'BooleanFilter'],
